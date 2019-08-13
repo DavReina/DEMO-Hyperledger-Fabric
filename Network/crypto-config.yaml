@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------------
+# "OrdererOrgs" - Definición de organizaciones que gestionan nodos de orden
+# ---------------------------------------------------------------------------
+OrdererOrgs:
+- Name: NodoOrdenador
+  Domain: acme.com
+  # ---------------------------------------------------------------------------
+  # "Specs" - Mas adelante se explica a profundidad
+  # ---------------------------------------------------------------------------
+  Specs: 
+  - Hostname: ordenador
+  - Hostname: ordenador2
+  - Hostname: ordenador3
+  - Hostname: ordenador4
+  - Hostname: ordenador5
+
+# ---------------------------------------------------------------------------
+# "PeerOrgs" - Definición de organizaciones que gestionan nodos pares
+# ---------------------------------------------------------------------------
+PeerOrgs:
+# ---------------------------------------------------------------------------
+  # Org1
+  # ---------------------------------------------------------------------------
+- Name: motores
+  Domain: motores.acme.com
+
+  Template:
+    Count: 1
+
+  Users:
+    Count: 1
