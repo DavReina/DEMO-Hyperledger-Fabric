@@ -1,0 +1,43 @@
+##############################################################################
+#
+#   Seccion: Organizations
+#
+#   - Esta sección define las diferentes identidades organizativas a las que 
+#     se hará referencia más adelante en la configuración.
+#
+##############################################################################
+Organizations:
+  # SampleOrg define un MSP usando el sampleconfig. Nunca debe estar en 
+  # producción, pero puede usarse como plantilla para otras definiciones
+  - &OrgOrdenador
+    # DefaultOrg define la organización que se usa en el sampleconfig
+    # del entorno de desarrollo fabric.git
+    Name: OrgOrdenador
+    # ID para cargar la definición de MSP 
+    ID: MSPOrdenador
+    # MSPDir es la direccion de la carpeta que contendra la configuracion MSP
+    MSPDir: crypto-config/OrganizacionesOrdenadoras/acme.com/msp
+  - &motores
+    Name: MSPmotores
+    ID: MSPmotores
+    MSPDir: crypto-config/OrganizacionesPeers/motores.acme.com/msp
+    AnchorPeers:
+      # AnchorPeers define la ubicación de los pares que se pueden utilizar
+      # para la comunicación entre organizaciones.
+      # Tenga en cuenta que este valor está codificado en el bloque de génesis
+      # en el contexto de la sección Aplicación.
+      - Host: peer0.motores.acme.com
+        Port: 7051 # No se si este es el puerto que debo poner
+##############################################################################
+#
+#   Seccion: Application
+#
+#   - Esta sección define los valores para codificar en una transacción de 
+#     configuración o bloque de génesis para parámetros relacionados con la
+#     aplicación
+#
+##############################################################################
+Application: &ApplicationDefaults
+  # Organizaciones es la lista de organizaciones que se definen como
+  # participantes en el lado de la aplicación de la red.
+  Organizations:
