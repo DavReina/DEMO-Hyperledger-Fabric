@@ -17,17 +17,86 @@ Organizations:
     ID: MSPOrdenador
     # MSPDir es la direccion de la carpeta que contendra la configuracion MSP
     MSPDir: crypto-config/OrganizacionesOrdenadoras/acme.com/msp
+
+    # Las políticas definen el conjunto de políticas en este nivel del árbol
+    # de configuración para las políticas de la organización, su ruta canónica suele ser
+    #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
+    #(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+    Policies: 
+      Readers:
+        Type: Signature
+        Rule: "OR('MSPOrdenador.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('MSPOrdenador.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('MSPOrdenador.admin')"
   - &motores
     Name: MSPmotores
     ID: MSPmotores
     MSPDir: crypto-config/OrganizacionesPeers/motores.acme.com/msp
+    #(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+    Policies: 
+      Readers:
+        Type: Signature
+        Rule: "OR('MSPmotores.admin', 'MSPmotores.peer', 'MSPmotores.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('MSPmotores.admin', 'Org1MSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('MSPmotores.admin')"
     AnchorPeers:
-      # AnchorPeers define la ubicación de los pares que se pueden utilizar
+      # AnchorPeers define la ubicación de los Peers que se pueden utilizar
       # para la comunicación entre organizaciones.
       # Tenga en cuenta que este valor está codificado en el bloque de génesis
       # en el contexto de la sección Aplicación.
       - Host: peer0.motores.acme.com
         Port: 7051 # No se si este es el puerto que debo poner
+
+################################################################################
+#
+#   Seccion: Capabilities
+#
+# Esta sección define las capacidades de la red fabric. Este es un concepto
+# nuevo a partir de v1.1.0 y no debe utilizarse en redes mixtas con Peers y
+# Orderers v1.0.x. Las capacidades definen características que deben estar
+# presentes en un binario de estructura para que ese binario participe de
+# manera segura en la red de estructura. Por ejemplo, si se agrega un nuevo
+# tipo de MSP, los archivos binarios más nuevos podrían reconocer y validar
+# las firmas de este tipo, mientras que los archivos binarios más antiguos
+# sin este soporte no podrían validar esas transacciones. Esto podría conducir
+# a diferentes versiones de los binarios de la tela que tienen diferentes
+# estados mundiales. En cambio, la definición de una capacidad para un canal
+# informa a los binarios sin esta capacidad que deben dejar de procesar
+# transacciones hasta que se hayan actualizado. Para v1.0.x si se definen
+# capacidades (incluido un mapa con todas las capacidades desactivadas), el
+# par v1.0.x se bloqueará deliberadamente.
+#(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+################################################################################
+#Capabilities: 
+## Las capacidades del canal se aplican tanto a los Orderers como a los Peers y
+## deben ser compatibles con ambos.
+## Ser el valor de la capacidad de verdadero para requerirlo.
+#  Channel: &ChannelCapabilities
+#    # V1.4.2 para Channel es un indicador general para el comportamiento que se
+#    # ha determinado que es deseado para todos los Orderers y Peers que se
+#    # ejecutan en el nivel v1.4.2, pero que sería incompatible con los Orderers
+#    # y Peers de versiones anteriores.
+#    # Antes de habilitar las capacidades del canal V1.4.2, asegúrese de que todos
+#    # los Orderers y Peers en un canal estén en v1.4.2 o posterior.
+#    V1_4_2: true
+#  # Las capacidades de Orderers solo se aplican a los Orderers, y se pueden usar de
+#  # forma segura con Peers de versiones anteriores.
+#  # Establezca el valor de la capacidad en verdadero para requerirlo.
+#  Orderer: &OrdererCapabilities
+#    V1_4_2: true
+#  Application: &ApplicationCapabilities
+#    V1_4_2: true
+#    V1_3: false
+#    V1_2: false
+#    V1_1: false
 ##############################################################################
 #
 #   Seccion: Application
@@ -38,6 +107,131 @@ Organizations:
 #
 ##############################################################################
 Application: &ApplicationDefaults
-  # Organizaciones es la lista de organizaciones que se definen como
+  # Organizations es la lista de organizaciones que se definen como
   # participantes en el lado de la aplicación de la red.
   Organizations:
+
+##(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+#  Policies: 
+#    Readers:
+#      Type: ImplicitMeta
+#      Rule: "ANY Readers"
+#    Writers:
+#      Type: ImplicitMeta
+#      Rule: "ANY Writers"
+#    Admins:
+#      Type: ImplicitMeta
+#      Rule: "MAJORITY Admins"
+#
+#  Capabilities:
+#    <<: *ApplicationCapabilities
+##############################################################################
+#
+#   Seccion: Orderer
+#
+# - Esta sección define los valores para codificar en una transacción de
+#   configuración o bloque de génesis para parámetros relacionados con el
+#   orderer
+#
+#   Entiendo que este es la definiciòn del BLOQUE GENESIS
+##############################################################################
+Orderer: &OrdererDefaults
+  
+  # Orderer Type: La implementaciòn del orderer para iniciar
+  # Los tipos compatibles son "solo" y "kafka"
+  OrdererType: solo
+
+  Addresses:
+    - orderer.acme.com:7050
+
+  # Batch Timeout: La cantidad de tiempo que se espera antes de crear un Batch (lote?)
+  BatchTimeout: 2s
+
+  # Batch Size: Controla el numero de mensajes por lotes(por lotes) dentro un bloque
+  BatchSize: 
+    # Max Message Count: El numero maximo de mensajes permitidos en un Batch (lote)
+    MaxMessageCount: 10
+
+    #Absolute Max Bytes: El maximo absoluto de bytes permitidos para la serializar mensjaes en un batch (lote)
+    AbsoluteMaxBytes: 99 MB
+
+    # Preferred Max Bytes: El maximo absoluto de bytes permitidos para la serializar mensjaes en un batch (lote)
+    PreferredMaxBytes: 512 KB
+
+  Kafka:
+    # Brokers: Una lista de corredores de Kafka a los que se conecta el ordenante
+    # NOTA: Use notacion IP:port
+    Brokers:
+      - 127.0.0.1:9092
+  
+  Organizations:
+  ##(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+  #Policies: 
+  #  Readers:
+  #    Type: ImplicitMeta
+  #    Rule: "ANY Readers"
+  #  Writers:
+  #    Type: ImplicitMeta
+  #    Rule: "ANY Writers"
+  #  Admins:
+  #    Type: ImplicitMeta
+  #    Rule: "MAJORITY Admins"
+  #  # El BlockValidation especifica que FIRMAS deben ser incluidas en el
+  #  # bloque del Orderer para el Peer la valide.
+  #  BlockValidation:
+  #    Type: ImplicitMeta
+  #    Rule: "ANY Wers"
+
+################################################################################
+#
+#   Seccion: CHANNEL (Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
+#
+#   Esta sección define los valores para codificar en una transacción de configuración o bloque de génesis para parámetros relacionados con el canal.
+#
+################################################################################
+#Channel: &ChannelDefaults
+#  # Políticas define el conjunto de políticas en este nivel del árbol de configuración
+#  # Para las políticas de canal, su ruta canónica es
+#  #   /Channel/<PolicyName>
+#  Policies:
+#    # Quién puede invocar la API 'Deliver'
+#    Readers:
+#      Type: ImplicitMeta
+#      Rule: "ANY Readers"
+#    # Quién puede invocar la API 'Broadcast'
+#    Writers:
+#      Type: ImplicitMeta
+#      Rule: "ANY Writers"
+#    # Por defecto, quien puedemodificar elementos en este nivel de configuraciòn
+#    Admins:
+#      Type: ImplicitMeta
+#      Rule: "MAJORITY Admins"
+#
+#  Capabilities:
+#    <<: *ChannelCapabilities
+
+################################################################################
+#
+#   Profile
+#
+#   - Different configuration profiles may be encoded here to be specified
+#   as parameters to the configtxgen tool
+#
+################################################################################
+Profiles:
+
+  OneOrgOrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrgOrdenador
+    Consortiums:
+      SampleConsortium:
+        Organizations:
+          - *motores
+  OneOrgChannel:
+    Consortium: SampleConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *motores
