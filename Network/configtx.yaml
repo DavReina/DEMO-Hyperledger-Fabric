@@ -16,7 +16,7 @@ Organizations:
     # ID para cargar la definición de MSP 
     ID: MSPOrdenador
     # MSPDir es la direccion de la carpeta que contendra la configuracion MSP
-    MSPDir: crypto-config/OrganizacionesOrdenadoras/acme.com/msp
+    MSPDir: crypto-config/ordererOrganizations/acme.com/msp
 
     # Las políticas definen el conjunto de políticas en este nivel del árbol
     # de configuración para las políticas de la organización, su ruta canónica suele ser
@@ -35,7 +35,7 @@ Organizations:
   - &motores
     Name: MSPmotores
     ID: MSPmotores
-    MSPDir: crypto-config/OrganizacionesPeers/motores.acme.com/msp
+    MSPDir: crypto-config/peerOrganizations/motores.acme.com/msp
     #(Su uso comun es en REDES de 2 o màs organizaciones) (Se puede usar en una sola ORG tambien)
     Policies: 
       Readers:
