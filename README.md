@@ -17,3 +17,4 @@ Aqui un listado de los cambios realizados en cada commit:
 | DHLF003 | Se termino el archivo configtx, para que genere el bloque génesis y se investigo a fondo su estructura y sintaxis. |
 | DHLF004 | Bloque genesis generado |
 | DHLF005 | READMEs actualizados |
+| DHLF006 | Channel y AnchorPeers creados |
