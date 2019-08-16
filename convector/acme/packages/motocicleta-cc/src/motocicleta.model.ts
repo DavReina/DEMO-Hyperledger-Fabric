@@ -31,25 +31,20 @@ export class Motocicleta extends ConvectorModel<Motocicleta> {
   @ReadOnly()
   @Required()
   @Validate(yup.string())
-  public id: string;
-
-  @ReadOnly()
-  @Required()
-  @Validate(yup.string())
   public placa: string;
 
   @ReadOnly()
   @Required()
-  @Validate(yup.string())
-  public modelo: string;
+  @Validate(yup.number())
+  public modelo: number;
 
   @Required()
-  @Validate(yup.number())
-  public color: number;
+  @Validate(yup.string())
+  public color: string;
 
   @ReadOnly()
   @Required()
-  @Validate(yup.string())
+  @Validate(yup.string())string
   public marca: string;  
 
   @Required()

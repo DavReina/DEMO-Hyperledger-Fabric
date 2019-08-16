@@ -26,3 +26,4 @@ Aqui un listado de los cambios realizados en cada commit:
 | CONV004 | Dependencias entre paquetes añadidas satisfactoriamente |
 | CONV005 | Modelos creados |
 | CONV006 | Controladores creados |
+| CONV007 | Tests listo para probar |

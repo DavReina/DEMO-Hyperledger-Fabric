@@ -25,13 +25,13 @@ export class MotocicletaController extends ConvectorController<ChaincodeTx> {
 
   public async cambiarOwner(
     @Param(yup.string())
-    motoId: string,
+    placaMoto: string,
     @Param(Owner.schema())
     newowner: Owner
   ){
-    let moto = await Motocicleta.getOne(motoId);
+    let moto = await Motocicleta.getOne(placaMoto);
     if (!moto) {
-      throw new Error(`Motocicleta con el id ${motoId} no encontrada`);
+      throw new Error(`Motocicleta con el id ${placaMoto} no encontrada`);
     }
 
     let vendedor = await Usuario.getOne(moto.owner.ownerID);
@@ -39,16 +39,20 @@ export class MotocicletaController extends ConvectorController<ChaincodeTx> {
       throw new Error(`Usuario con el id ${moto.owner.ownerID} no encontrado`);
     }
 
-    let comprador = await Usuario.getOne(newowner.id);
+    let comprador = await Usuario.getOne(newowner.ownerID);
     if (!comprador) {
-      throw new Error(`Usuario con el id ${newowner.id} no encontrado`);
+      throw new Error(`Usuario con el id ${newowner.ownerID} no encontrado`);
     }
 
-    comprador.saldo_cuenta -= moto.precio;
-    vendedor.saldo_cuenta += moto.precio;
-
-    moto.owner = newowner;
-
+    if (comprador.saldo_cuenta >= moto.precio) {
+      comprador.saldo_cuenta -= moto.precio;
+      vendedor.saldo_cuenta += moto.precio; 
+      
+      moto.owner = newowner;
+    } else {
+      throw new Error(`Usuario con id ${newowner.ownerID} no tiene saldo suficiente para realizar la compra`);
+    }
+    
     await moto.save().then(async function(){
       await vendedor.update(vendedor);
     }).then(async function(){

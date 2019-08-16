@@ -28,8 +28,8 @@ export class Usuario extends ConvectorModel<Usuario> {
   public apellido: string;
 
   @Required()
-  @Validate(yup.string())
-  public edad: string;
+  @Validate(yup.number())
+  public edad: number;
 
   @ReadOnly()
   @Required()

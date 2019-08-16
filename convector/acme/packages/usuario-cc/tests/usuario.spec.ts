@@ -29,12 +29,35 @@ describe('Usuario', () => {
   it('should create a default model', async () => {
     const modelSample = new Usuario({
       id: uuid(),
-      name: 'Test',
-      created: Date.now(),
-      modified: Date.now()
+      uid: 'USER_1',
+      nombre: 'David',
+      apellido: 'Reina',
+      edad: 21,
+      cedula: 1020827649,
+      licencia: 10203040,
+      saldo_cuenta: 500
     });
 
-    await usuarioCtrl.create(modelSample);
+    await usuarioCtrl.crear(modelSample);
+  
+    const justSavedModel = await adapter.getById<Usuario>(modelSample.id);
+  
+    expect(justSavedModel.id).to.exist;
+  });
+
+  it('should create a default model', async () => {
+    const modelSample = new Usuario({
+      id: uuid(),
+      uid: 'USER_2',
+      nombre: 'Sebastian',
+      apellido: 'Reina',
+      edad: 21,
+      cedula: 1010867849,
+      licencia: 10203040,
+      saldo_cuenta: 500
+    });
+
+    await usuarioCtrl.crear(modelSample);
   
     const justSavedModel = await adapter.getById<Usuario>(modelSample.id);
   
