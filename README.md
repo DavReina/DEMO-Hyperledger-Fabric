@@ -18,3 +18,4 @@ Aqui un listado de los cambios realizados en cada commit:
 | DHLF004 | Bloque genesis generado |
 | DHLF005 | READMEs actualizados |
 | DHLF006 | Channel y AnchorPeers creados |
+| DHLF007 | DockerCompose creado |

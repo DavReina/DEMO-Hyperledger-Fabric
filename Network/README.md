@@ -43,4 +43,8 @@ Una vez creado el canal, procedemos a crear los `anchorPeers` de cada organizaci
 ```bash
 ./bin/configtxgen -profile <nombredelperfildelcanal> -outputAnchorPeersUpdate ./channel-artifacts/<nombredelanchor>.tx -channelID <nombreclavedelchannel> -asOrg <nombredelcertificadoMSPdelaorganizacion>
 ```
-Despues de esto, teniendo en cuneta que se tienen los archivos base del Docker-Composer en nuestra carpeta raiz ![Imagen](https://github.com/DavReina/DEMO-Hyperledger-Fabric/tree/master/imgs/network_3.png), procedemos a crear la imagen de nuestra org
+Despues de esto, teniendo en cuneta que se tienen los archivos base del Docker-Composer en nuestra carpeta raiz ![Imagen](https://github.com/DavReina/DEMO-Hyperledger-Fabric/tree/master/imgs/network_3.png), procedemos a crear la imagen de nuestra org.
+
+* Tener en cuenta que se puede hacer un solo `docker-compose.yaml` sin tener que incluir o llamar (estoy muy acostumbrado a C++) al archivo `base` expuesto en este punto.
+
+
