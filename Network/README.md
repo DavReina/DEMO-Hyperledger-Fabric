@@ -20,7 +20,7 @@ Nos dirigimos a la carpeta donde queremos definir nuestra Red. Ya en esta carpet
 Tambien creamos junto con este, el archivo `configtx.yaml`
 * Definición del codigo igualmente dentro del mismo.
 
-![Imagen](https://github.com/DavReina/DEMO-Hyperledger-Fabric/tree/master/imgs/network_1.png)
+![Imagen](../imgs/network_1.png)
 
 Revisar la carpeta `./bin` y su contenido puesto que en esta estarán las librerías necesarias para el manejo de una red blockchain con Hyperledger.
 

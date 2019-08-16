@@ -20,5 +20,5 @@ Aqui un listado de los cambios realizados en cada commit:
 | DHLF006 | Channel y AnchorPeers creados |
 | DHLF007 | DockerCompose creado |
 | DHLF008 | SDKNode Fallo |
-| COMP001 | Inicio uso de Composer |
-| COMP002 | Modelos creados |
+| CONV001 | Inicio uso de Composer |
+| CONV002 | Modelos creados |

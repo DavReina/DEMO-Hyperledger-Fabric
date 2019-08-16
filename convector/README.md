@@ -1,5 +1,6 @@
 # Convector: Smart Contracts
 ## Guia:
+### Instalación
 Instalar `CLI` convector
  ```bash
  npm i -g @worldsibu/convector-cli
@@ -16,14 +17,26 @@ Instalar `CLI` convector
  ```
 Ahora procedemos a crear nuestro proyecto en el directorio deseado usando los siguentes  comandos
 ```bash
-conv new motor
+conv new <NOMBRE-DEL-PROYECTO> -c <NOMBRE-DEL-PRIMER-CHAINCODE>
 cd motor
 npm install
 ```
-Este es el modelo por defecto que genero convector
+Esto creo en modelo en base al `chaincode` ingresado.
+Ahora bien, como se realizara la prueba usando usuarios con otro chaincode, la motocicleta.
+(Ver diseño de la red acontinuación)
+
+![Imagen](../imgs/diseno_red.png)
+
+Añadiremos un nuevo `chaincode` que manejara a los usuarios (organizaciones)
+```bash
+conv generate chaincode usuario
+```
+Dando como resultado estos nuevos archivos en la carpete `./packages`
+
+![Imagen](../imgs/conv_1.png)
 
 ### Modelo
-Para generar un nuevo `Model` usamos el siguente comando:
+Se puede generar un `Model` dentro del chaincode usando el siguente comando:
 ```bash
 conv generate -c <NOMBRE-DEL-CHAINCODE> model <NOMBRE-DEL-MODELO>
 ```
