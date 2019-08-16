@@ -12,16 +12,31 @@ export class Usuario extends ConvectorModel<Usuario> {
   @Required()
   public readonly type = 'io.worldsibu.usuario';
 
+  @ReadOnly()
   @Required()
   @Validate(yup.string())
-  public name: string;
+  public nombre: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
+  public apellido: string;
+
+  @Required()
+  @Validate(yup.string())
+  public edad: string;
 
   @ReadOnly()
   @Required()
   @Validate(yup.number())
-  public created: number;
+  public cedula: number;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.number())
+  public licencia: number;
 
   @Required()
   @Validate(yup.number())
-  public modified: number;
+  public saldo_cuenta: number;
 }

@@ -23,7 +23,8 @@ npm install
 ```
 Esto creo en modelo en base al `chaincode` ingresado.
 Ahora bien, como se realizara la prueba usando usuarios con otro chaincode, la motocicleta.
-(Ver diseño de la red acontinuación)
+
+> Ver diseño de la red acontinuación.
 
 ![Imagen](../imgs/diseno_red.png)
 
@@ -45,3 +46,7 @@ Se puede generar un `Model` dentro del chaincode usando el siguente comando:
 ```bash
 conv generate -c <NOMBRE-DEL-CHAINCODE> model <NOMBRE-DEL-MODELO>
 ```
+> Pero en este caso no es necesario crear uno, por lo tanto se omitira este paso.
+
+Los archivos `model.ts` y `controller-ts` se auto generaran y aqui solo se procesder a editar nuestros modelos.
+
