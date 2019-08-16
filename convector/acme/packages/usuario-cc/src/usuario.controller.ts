@@ -11,7 +11,7 @@ import { Usuario } from './usuario.model';
 @Controller('usuario')
 export class UsuarioController extends ConvectorController<ChaincodeTx> {
   @Invokable()
-  public async create(
+  public async crear(
     @Param(Usuario)
     usuario: Usuario
   ) {

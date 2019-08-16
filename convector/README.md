@@ -48,5 +48,4 @@ conv generate -c <NOMBRE-DEL-CHAINCODE> model <NOMBRE-DEL-MODELO>
 ```
 > Pero en este caso no es necesario crear uno, por lo tanto se omitira este paso.
 
-Los archivos `model.ts` y `controller-ts` se auto generaran y aqui solo se procesder a editar nuestros modelos.
-
+Los archivos `model.ts` y `controller-ts` se auto generaran y aqui solo se procesder a editar nuestros modelos y nuestros controladores.

@@ -25,3 +25,4 @@ Aqui un listado de los cambios realizados en cada commit:
 | CONV003 | Red mejor extructurada |
 | CONV004 | Dependencias entre paquetes añadidas satisfactoriamente |
 | CONV005 | Modelos creados |
+| CONV006 | Controladores creados |

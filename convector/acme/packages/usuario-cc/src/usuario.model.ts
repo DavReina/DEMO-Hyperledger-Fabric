@@ -15,6 +15,11 @@ export class Usuario extends ConvectorModel<Usuario> {
   @ReadOnly()
   @Required()
   @Validate(yup.string())
+  public uid: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
   public nombre: string;
 
   @ReadOnly()

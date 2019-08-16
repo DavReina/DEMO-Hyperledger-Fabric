@@ -31,6 +31,11 @@ export class Motocicleta extends ConvectorModel<Motocicleta> {
   @ReadOnly()
   @Required()
   @Validate(yup.string())
+  public id: string;
+
+  @ReadOnly()
+  @Required()
+  @Validate(yup.string())
   public placa: string;
 
   @ReadOnly()
@@ -54,7 +59,8 @@ export class Motocicleta extends ConvectorModel<Motocicleta> {
   @Required()
   @Validate(yup.number())
   public precio: number;
-
+  
+  @Required()
   @Validate(Owner)
   public owner: FlatConvectorModel<Owner>;
 }
