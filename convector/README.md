@@ -35,6 +35,11 @@ Dando como resultado estos nuevos archivos en la carpete `./packages`
 
 ![Imagen](../imgs/conv_1.png)
 
+Ahora bien, dado que el `controller` de la motocicleta tendra logica proveninete de los usuarios, se necesita incluir el paquete `usuario-cc` a las dependencias del paquete `motocicleta-cc`.
+```bash
+npx lerna add usuario-cc --scope motocicleta-cc --include-filtered-dependencies
+```
+
 ### Modelo
 Se puede generar un `Model` dentro del chaincode usando el siguente comando:
 ```bash

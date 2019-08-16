@@ -22,3 +22,5 @@ Aqui un listado de los cambios realizados en cada commit:
 | DHLF008 | SDKNode Fallo |
 | CONV001 | Inicio uso de Composer |
 | CONV002 | Modelos creados |
+| CONV003 | Red mejor extructurada |
+| CONV004 | Dependencias entre paquetes añadidas satisfactoriamente |
