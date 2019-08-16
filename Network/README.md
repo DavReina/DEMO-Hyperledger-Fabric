@@ -47,4 +47,20 @@ Despues de esto, teniendo en cuneta que se tienen los archivos base del Docker-C
 
 * Tener en cuenta que se puede hacer un solo `docker-compose.yaml` sin tener que incluir o llamar (estoy muy acostumbrado a C++) al archivo `base` expuesto en este punto.
 
+Ahora creamos el archivo `docker-compose-cli-yaml` con el cual crearemos los contenedores basados en las imagens instaladas de la fabrica. (Este archivo fue modificado con fines de aprendizaje)
 
+Desde un terminal nuevo ejecutamos el siguente comando:
+
+```bash 
+docker-compose -f docker-compose-cli.yaml up -d
+```
+Teniendo en nuestro como salida (si se realizo correctamente):
+
+```bash
+Creating network "hlf_basic" with the default driver
+Creating couchdb            ... done
+Creating ordenador.acme.com ... done
+Creating ca.acme.com        ... done
+Creating cli                ... done
+Creating peer0.motores.acme.com ... done
+```

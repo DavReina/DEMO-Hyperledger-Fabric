@@ -4,7 +4,7 @@ Este demo tiene como finalidad entender a profundidad del SDK de HYperledger Fab
 
   - La aplicación fronend estara realizada en angular
   - Se alimentara atravez de rest server
-  - La version utilizada para este demo es HLF 1.3.0
+  - La version utilizada para este demo es HLF 1.4.0
 
 ### Realease
 
@@ -19,3 +19,4 @@ Aqui un listado de los cambios realizados en cada commit:
 | DHLF005 | READMEs actualizados |
 | DHLF006 | Channel y AnchorPeers creados |
 | DHLF007 | DockerCompose creado |
+| DHLF008 | SDKNode Fallo |
